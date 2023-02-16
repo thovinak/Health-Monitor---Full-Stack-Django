@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+    mysql:
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${ROOTPW}
+            MYSQL_USER: ${USERNAME}
+            MYSQL_PASSWORD: ${USERPASS}
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        environment:
+            PMA_HOST: mysql
+            PMA_USER: ${USERNAME}
+            PMA_PASSWORD: ${USERPASS}
+        ports:
+            - 8080:80
+
+    django:
+        image: Project:0.1
+        build: .
+        context: .
+        labels:
+            - tech.learningdjago.maintainer="Karthik Thovinakere"
+            - tech.learningdjango.description="This is the first Django Project we are making"
+            - tech.learningdjango.email="noreply@learningdjango.tech"
+        ports:
+            80:3000
