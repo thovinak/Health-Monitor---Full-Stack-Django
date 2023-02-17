@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ page_title}}</title>
+    {% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"  crossorigin="anonymous">
+	<script src="{% static 'js/bootstrap.bundle.js'%}"  crossorigin="anonymous"></script>
+    <link href="{% static 'icons/bootstrap-icons.css' %}" rel="stylesheet"  crossorigin="anonymous">
+    {% block heading_content %}
+    {% endblock %}
+</head>
+<body>
+{% csrf_token %}
+    <div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link align-middle px-0">
+                            <img src="/static/icons/house.svg" class="fs-4">
+                             <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <img class="fs-4" src="/static/icons/speedometer.svg"></img> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="/Sinewave" class="nav-link px-0"> <span class="d-none d-sm-inline">Sinewave Noise</span>  </a>
+                            </li>
+                            <li>
+                                <a href="/ECG" class="nav-link px-0"> <span class="d-none d-sm-inline">ECG </span> </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse"class="nav-link px-0 align-middle">
+                            <img class="fs-4" src="/static/icons/table.svg"></img> <span class="ms-1 d-none d-sm-inline">Tabulated View</span></a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="/tables/sinewave" class="nav-link px-0"> <span class="d-none d-sm-inline">Sinwave</span> 1</a>
+                            </li>
+                            <li>
+                                <a href="/tables/ECG" class="nav-link px-0"> <span class="d-none d-sm-inline">ECG</span> 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Fourier Transforms</span></a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="/transforms/sinewave" class="nav-link px-0"> <span class="d-none d-sm-inline">Sine wave</span> </a>
+                            </li>
+                            <li>
+                                <a href="/transforms/ECG" class="nav-link px-0"> <span class="d-none d-sm-inline">ECG</span> </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/login" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Login</span> </a>
+                    </li>
+                    <li>
+                        <a href="API" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">API</span> </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">Welcome</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <!--
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col py-3">
+           <!DOCTYPE html>
+
+
+<head>
+	<title>Karthik - Resume</title>
+    <link rel="icon" type="image/png" href="/static/icons/mcamster_favicon.png" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-bottom: 20px;
+		}
+		td, th {
+			border: 3px solid #ddd;
+			padding: 8px;
+		}
+        .pic{
+            border-radius: 50%;
+            margin-right: 20px;
+            width: 200px;
+            height: 200px;
+        }
+	</style>
+
+</head>
+<body>
+	<header>
+         <img  src="karthik_pic.jpg" class="pic" alt="" style="width:10%" >
+
+		<h1>Karthik Thovinakere</h1>
+		<p>Junior Software Developer</p>
+        <p>Full stack</p>
+		<p><a href="www.linkedin.com/in/karthikthovinakere">linkedin</a></p>
+	</header>
+
+	<section>
+		<h2>Summary</h2>
+		<p>A skilled and motivated web developer with experience in developing and maintaining complex web applications. Proficient in HTML, CSS, JavaScript,PHP  and various web development frameworks. A creative problem solver with excellent communication skills and a passion for staying up-to-date with the latest web technologies.</p>
+	</section>
+
+<section>
+		<h2>Skills</h2>
+		<table>
+			<tr>
+				<th>Web Development</th>
+				<th>Programming Languages</th>
+				<th>Frameworks/Libraries</th>
+			</tr>
+			<tr>
+				<td>HTML5</td>
+				<td>JavaScript</td>
+				<td>React.js</td>
+			</tr>
+			<tr>
+				<td>CSS3</td>
+				<td>php</td>
+				<td>Angular.js</td>
+			</tr>
+			<tr>
+				<td>jQuery</td>
+				<td>Java</td>
+				<td>Bootstrap</td>
+			</tr>
+		</table>
+	</section>
+
+	<section>
+		<h2>Work Experience</h2>
+		<table>
+			<tr>
+				<th>Job Title</th>
+				<th>Company</th>
+				<th>Duration</th>
+				<th>Responsibilities</th>
+			</tr>
+			<tr>
+				<td>Backend Lead</td>
+				<td>FirstHx </td>
+				<td>June 2022 - Present</td>
+				<td>
+					<ul>
+						<li>Led a team of 5 as a Backend Lead, overseeing the development of web applications
+                        and APIs using PHP and related technologies</li>
+                        <li> Utilized PHP to create a patient history-taking application, which included HTML, CSS,
+                        and JavaScript</li>
+                        <li>Participate in Agile development processes, including daily stand-up meetings and sprint planning</li>
+                        <li>Worked collaboratively with cross-functional teams, including UI/UX designers and
+                        medical professionals, to ensure the application met all requirements and was easy to
+                        use</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+                <td>Junior Developer</td>
+				<td>FirstHx </td>
+				<td>January 2022 </td>
+				<td>
+					<ul>
+						<li>Developed and maintained multiple web applications using Angular and Node.js</li>
+						<li>Collaborated with clients to gather requirements and provide technical guidance</li>
+						<li>Managed code reviews and mentored junior developers</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>Logistics Co-Director </td>
+				<td>McMaster MacHacks Club</td>
+				<td>2022-Present</td>
+				<td>
+					<ul>
+						<li>Served as the Logistics Co-Director for MacHacks, an annual hackathon event that brings
+                        together students from across the McMaster community to collaborate and create
+                        innovative projects. </li>
+						<li>Coordinated all aspects of event logistics, including securing sponsorships and donations,
+                        coordinating transportation and accommodations for participants, and managing event
+                        space and catering. This resulted in a successful event that received positive feedback
+                        from attendees and sponsors.</li>
+						<li>Worked closely with the MacHacks executive team to develop event themes, logistics
+                        timelines, and budgets, ensuring that all aspects of the event were accounted for and
+                        executed efficiently</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</section>
+
+	<section>
+		<h2>Education</h2>
+		<table>
+			<tr>
+				<th>Degree</th>
+				<th>Institution</th>
+				<th>Graduation Date</th>
+			</tr>
+			<tr>
+				<td>Automation Engineering</td>
+				<td>McMaster University</td>
+				<td>2023</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<ul>
+						<li>Studied control systems, programming, and robotics to develop skills in automation engineering</li>
+						<li>Currently working on a capstone project to create a digital twin of a manufacturing facility, using Unity and realvirtual software tools to simulate and optimize production processes.</li>
+						<li>Developed proficiency in programming languages such as Python, C++, and MATLAB</li>
+						<li>Experience with PLC programming languages such as Ladder Logic, Function Block
+                        Diagrams, and Structured Text. </li>
+                        <li>Utilized MATLAB and PLCs to develop PID controller design and tuning methods
+                        including cascade control, feedforward control, and gain scheduling. </li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</section>
+
+</body>
+
+        </div>
+    </div>
+</div>
+</body>
+
