@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block heading_content %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"
+            crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript">
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="w-auto">
+        <canvas id="sineChart"></canvas>
+    </div>
+    <div class="w-auto">
+        <canvas id="fftChart"></canvas>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+
+        const cts = document.getElementById('sineChart');
+        const data = {
+                labels: {{ data.labels|safe }},
+                datasets: [{
+
+                    label: "Noisy Signal",
+                    data: {{ data.values|safe }},
+                    fill: false,
+                    tension: 0.1
+                }],
+                options: {
+                    responsive: true,
+                    aspectRatio: 1,
+                    scales: {
+                        x: {
+                            max: 1000
+                        },
+                        y: {
+                            max: 1
+                        }
+                    }
+                }
+                ,
+            }
+        ;
+        const config = {
+            type: 'line',
+            data: data,
+        };
+        const chart = new Chart(cts, config);
+    </script>
+
+{% endblock %}

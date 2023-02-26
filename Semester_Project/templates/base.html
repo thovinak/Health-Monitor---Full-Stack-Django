@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>{{ page_title}}</title>
+    <meta charset="UTF-8">
+    <title>{{ django|title }}</title>
     {% load static %}
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"  crossorigin="anonymous">
-	<script src="{% static 'js/bootstrap.bundle.js'%}"  crossorigin="anonymous"></script>
-    <link href="{% static 'icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width initial-scale=1.0"/>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" crossorigin="anonymous">
+    <script src="{% static 'js/bootstrap.bundle.js' %}"
+            crossorigin="anonymous"></script>
+    <link href="{% static 'icons/bootstrap-icons.css' %}" rel="stylesheet" crossorigin="anonymous" type="text/css">
+    <link href="{% static 'css/inversion.css' %}" rel="stylesheet" crossorigin="anonymous" type="text/css">
     {% block heading_content %}
     {% endblock %}
 </head>
@@ -22,91 +25,104 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="/" class="nav-link align-middle px-0">
-                            <img src="/static/icons/house.svg" class="fs-4">
-                             <span class="ms-1 d-none d-sm-inline">Home</span>
+                            <img class="fs-4 inv" src="{% static 'icons/houses-fill.svg' %}"/>
+                            <span class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <img class="fs-4" src="{% static 'icons/speedometer2.svg' %}"></img> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                            <img class="fs-4 inv" src="{% static 'icons/speedometer2.svg' %}"/> <span
+                                class="ms-1 d-none d-sm-inline">Dashboard</span>
+                        </a>
                         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="/dashboard/Sinewave" class="nav-link px-0">
-                                    <img class="fs-4" src="{% static 'icons/soundwave.svg' %}"></img>
-                                    <span class="d-none d-sm-inline">Sine Wave</span>  </a>
+                                <a href="/dashboard/sinewave" class="nav-link px-0">
+                                    <img class="fs-4 inv" src="{% static 'icons/soundwave.svg' %}"/>
+                                    <span class="d-none d-sm-inline">Sine Wave</span></a>
                             </li>
                             <li>
-                                <a href="/dashboard/ECG" class="nav-link px-0">
-                                    <img class="fs-4" src="{% static 'icons/heart-pulse-fill.svg' %}"></img>
-                                    <span class="d-none d-sm-inline">ECG </span> </a>
+                                <a href="/dashboard/heartbeat" class="nav-link px-0">
+                                    <img class="fs-4 inv" src="{% static 'icons/heart-pulse-fill.svg' %}"/>
+                                    <span class="d-none d-sm-inline">ECG Signal</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#submenu2" data-bs-toggle="collapse"class="nav-link px-0 align-middle">
-                            <img class="fs-4" src="{% static 'icons/table.svg' %}"></img> <span class="ms-1 d-none d-sm-inline">Tabulated View</span></a>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <img class="fs-4 inv" src="{% static '/icons/table.svg' %}"/> <span
+                                class="ms-1 d-none d-sm-inline">Tabulated View</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="/tabulated/sinewave" class="nav-link px-0">
-                                    <img class="fs-4" src="{% static 'icons/soundwave.svg' %}"></img>
-                                    <span class="d-none d-sm-inline">Sinwave</span> 1</a>
+                                <a href="/tabulation/sinewave" class="nav-link px-0">
+                                    <img class="fs-4 inv" src="{% static 'icons/soundwave.svg' %}"/>
+                                    <span class="d-none d-sm-inline">Sine Wave</span></a>
                             </li>
                             <li>
-                                <a href="/tabulated/ECG" class="nav-link px-0">
-                                    <img class="fs-4" src="{% static 'icons/heart-pulse-fill.svg' %}"></img>
-                                    <span class="d-none d-sm-inline">ECG</span> 1</a>
+                                <a href="/tabulation/heartbeat" class="nav-link px-0">
+                                    <img class="fs-4 inv" src="{% static 'icons/heart-pulse-fill.svg' %}"/>
+                                    <span class="d-none d-sm-inline">ECG Signal</span></a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <img class="fs-4" src="{% static 'icons/grid-fill.svg' %}"></img>
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Fourier Transforms</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                            <img class="fs-4 inv" src="{% static 'icons/grid-fill.svg' %}"/> <span
+                                class="ms-1 d-none d-sm-inline">Fourier Transform</span></a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
                                 <a href="/fourier/sinewave" class="nav-link px-0">
-                                    <img class="fs-4" src="{% static 'icons/soundwave.svg' %}"></img>
-                                    <span class="d-none d-sm-inline">Sine wave</span> </a>
+                                    <img class="fs-4 inv" src="{% static 'icons/soundwave.svg' %}"/>
+                                    <span class="d-none d-sm-inline">Sine Wave</span></a>
                             </li>
                             <li>
-                                <a href="/fourier/ECG" class="nav-link px-0">
-                                    <img class="fs-4" src="{% static 'icons/heart-pulse-fill.svg' %}"></img>
-                                    <span class="d-none d-sm-inline">ECG</span> </a>
+
+                                <a href="/fourier/heartbeat" class="nav-link px-0">
+                                    <img class="fs-4 inv" src="{% static 'icons/heart-pulse-fill.svg' %}"/>
+                                    <span class="d-none d-sm-inline">ECG Signal</span></a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="/login" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Login</span> </a>
+                            <img class="fs-4 inv" src="{% static 'icons/people-fill.svg' %}"/> <span
+                                class="ms-1 d-none d-sm-inline">Login</span> </a>
                     </li>
                     <li>
-                        <a href="API" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">API</span> </a>
+                        <a href="/api" class="nav-link px-0 align-middle">
+                            <img class="fs-4 inv" src="{% static 'icons/ethernet.svg' %}"/> <span
+                                class="ms-1 d-none d-sm-inline">API</span> </a>
                     </li>
                 </ul>
                 <hr>
                 <div class="dropdown pb-4 px-sm-2 px-0 fixed-bottom">
                     {% if user.is_authenticated %}
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{% static 'images/add:user.profile_picture' %}" alt="{{ user.username }}" width="30" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">Hello, {{ user.username }}</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="/profile/settings">Settings</a></li>
-                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="/signout">Sign out</a></li>
-                    </ul>
+                        <a href="#"
+                           class="d-flex align-items-center text-white text-decoration-none dropdown-toggle "
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{% static 'images/'|add:user.profile_picture %}" alt="{{ user.username }}"
+                                 width="30" height="30"
+                                 class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">Hello, {{ user.username }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="/profile/settings">Settings</a></li>
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/signout">Sign out</a></li>
+                        </ul>
                     {% else %}
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{% static 'icons/person-circle.svg' %}" alt="Anonymous" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">Hello, Anonymous</span>
+                        <a href="#"
+                           class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                           id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{% static 'icons/person-circle.svg' %}" alt="Anonymous" width="30" height="30"
+                                 class="rounded-circle inv">
+                            <span class="d-none d-sm-inline mx-1">Hello Anonymous</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
                             <li><a class="dropdown-item" href="/login">Login</a></li>
-                            <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
                         </ul>
                     {% endif %}
                 </div>
@@ -120,8 +136,10 @@
 </div>
 </body>
 <footer>
-
-    <div class = "bd-dark text-white text-center">
-        Karthik Thovinakere -©{% now 'y' %} All Rights Reserved.
+    <div class="bg-dark text-white text-center">
+        karthik Thovinakere - &copy;{% now 'Y' %}
+    </div>
 </footer>
+{% block scripts %}
+{% endblock %}
 </html>
