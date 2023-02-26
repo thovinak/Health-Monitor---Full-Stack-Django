@@ -6,4 +6,5 @@ app_name = 'tabulation'
 urlpatterns = [
     path('', views.index, name='index'),
     path("sinewave/", views.sine_wave, name='sine_wave'),
+    path("ecgsignal/", views.ecg_signal, name='ecg_signal'),
 ]
