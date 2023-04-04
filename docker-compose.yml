@@ -1,30 +1,117 @@
 version: '3.9'
 
 services:
-    mysql:
-        image: mysql
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: ${ROOTPW}
-            MYSQL_USER: ${USERNAME}
-            MYSQL_PASSWORD: ${USERPASS}
-    phpmyadmin:
-        image: phpmyadmin
-        restart: always
-        environment:
-            PMA_HOST: mysql
-            PMA_USER: ${USERNAME}
-            PMA_PASSWORD: ${USERPASS}
-        ports:
-            - 8080:80
+  redis:
+    image: redis
+    container_name: redis
+    command: "redis-server --save 60 1 --loglevel debug"
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_cache:/data
+    networks:
+      - beelzebub
 
-    django:
-        image: Project:0.1
-        build: .
-        context: .
-        labels:
-            - tech.learningdjago.maintainer="Karthik Thovinakere"
-            - tech.learningdjango.description="This is the first Django Project we are making"
-            - tech.learningdjango.email="noreply@learningdjango.tech"
-        ports:
-            80:3000
+  mysql:
+    image: mysql
+    container_name: mysql
+    command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql_scripts/:/docker-entrypoint-initdb.d/
+    ports:
+      - 3307:3306
+    networks:
+      - beelzebub
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOTPW}
+      - MYSQL_USER=${UNAME}
+      - MYSQL_PASSWORD=${USERPW}
+      - TZ=America/Toronto
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 55
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_started
+    ports:
+        - 8080:80
+    networks:
+      - beelzebub
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOTPW}
+      PMA_HOST: mysql
+#      PMA_ABSOLUTE_URI: https://localhost.testing/pma/
+
+#  nginx_reverse_proxy:
+#    image: nginx
+#    container_name: nginx
+#    restart: always
+#    depends_on:
+#      phpmyadmin:
+#        condition: service_started
+#    volumes:
+#      - ./nginx.django.rp.docker.conf:/etc/nginx/conf.d/default.conf:ro
+#      - ./SemesterProject/static:/data/static:ro
+#      - ./SemesterProject/media:/data/media:ro
+#      - ./Certs/certificate.crt:/etc/ssl/certs/certificate.crt:ro
+#      - ./Certs/certificate.key:/etc/ssl/private/certificate.key:ro
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    networks:
+#      - beelzebub
+#    environment:
+#      - NGINX_HOST=${SERVER_URL}
+#
+#  django:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    image: django_semester:latest
+#    labels:
+#      - project.app.name="Automation Django APP"
+#      - project.app.maintainer="Jan Boer"
+#      - project.app.email="jan.boer@mcmaster.ca"
+#    restart: always
+#    container_name: django
+#    volumes:
+#      - ./SemesterProject:/app
+#    networks:
+#      - beelzebub
+
+#  watchtowerr:
+#    image: containrrr/watchtower
+#    container_name: watchtowerr
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    restart: always
+#    networks:
+#      - beelzebub
+#    environment:
+#      - WATCHTOWER_CLEANUP='true'
+#      - TZ=America/Toronto
+#      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+#      - WATCHTOWER_INCLUDE_STOPPED='true'
+
+networks:
+  beelzebub:
+    ipam:
+      config:
+        - subnet: 10.10.10.0/28
+          gateway: 10.10.10.1
+
+
+volumes:
+  redis_cache:
+  mysql_data:
