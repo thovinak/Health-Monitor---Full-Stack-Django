@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
     'tabulation.apps.TabulationConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,9 +49,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'Semester_Project.urls'
+
+LOGIN_REDIRECT_URL = "/accounts/"
+LOGOUT_REDIRECT_URL = "/"
+
 
 TEMPLATES = [
     {
@@ -83,6 +91,20 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND'   : 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION'  : 'redis://redis:6379',
+        'TIMEOUT'   : 60,
+        'OPTIONS'   : {
+            'db'          : '1',
+            'parser_class': 'redis.connection.PythonParser',
+            'pool_class'  : 'redis.BlockingConnectionPool',
+        },
+        'KEY_PREFIX': 'DJANGO'
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -106,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "America/Toronto"
 
 USE_I18N = True
 

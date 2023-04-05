@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>Welcome {{ user.username }}</h1>
+    <hr/>
+
+    <div class="container-md px-4">
+        <h2>Personal Information</h2>
+        <div class="row gx-4">
+            <div class="col">
+                <table class="table table-responsive table-hover">
+                    <thead></thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">User Name</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">First Name</th>
+                        <td>{{ user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Name</th>
+                        <td>{{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Active Since</th>
+                        <td>{{ user.date_joined }}</td>
+                    </tr>
+
+                    {% if user.is_staff %}
+                        <tr>
+                            <th scope="row">Administrator</th>
+                            <td>YES!</td>
+                        </tr>
+
+                    {% endif %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

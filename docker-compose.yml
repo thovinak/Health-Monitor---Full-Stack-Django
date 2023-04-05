@@ -51,44 +51,46 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${ROOTPW}
       PMA_HOST: mysql
-#      PMA_ABSOLUTE_URI: https://localhost.testing/pma/
+      PMA_ABSOLUTE_URI: https://localhost.testing/pma/
 
-#  nginx_reverse_proxy:
-#    image: nginx
-#    container_name: nginx
-#    restart: always
-#    depends_on:
-#      phpmyadmin:
-#        condition: service_started
-#    volumes:
-#      - ./nginx.django.rp.docker.conf:/etc/nginx/conf.d/default.conf:ro
-#      - ./SemesterProject/static:/data/static:ro
-#      - ./SemesterProject/media:/data/media:ro
-#      - ./Certs/certificate.crt:/etc/ssl/certs/certificate.crt:ro
-#      - ./Certs/certificate.key:/etc/ssl/private/certificate.key:ro
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    networks:
-#      - beelzebub
-#    environment:
-#      - NGINX_HOST=${SERVER_URL}
-#
-#  django:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    image: django_semester:latest
-#    labels:
-#      - project.app.name="Automation Django APP"
-#      - project.app.maintainer="Jan Boer"
-#      - project.app.email="jan.boer@mcmaster.ca"
-#    restart: always
-#    container_name: django
-#    volumes:
-#      - ./SemesterProject:/app
-#    networks:
-#      - beelzebub
+  nginx_reverse_proxy:
+    image: nginx
+    container_name: nginx
+    restart: always
+    depends_on:
+      phpmyadmin:
+        condition: service_started
+    volumes:
+      - ./nginx.django.rp.docker.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./SemesterProject/static:/data/static:ro
+      - ./SemesterProject/media:/data/media:ro
+      - ./Certs/certificate.crt:/etc/ssl/certs/certificate.crt:ro
+      - ./Certs/certificate.key:/etc/ssl/private/certificate.key:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - beelzebub
+    environment:
+      - NGINX_HOST=${SERVER_URL}
+
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: django_semester:latest
+    labels:
+      - project.app.name="Automation Django APP"
+      - project.app.maintainer="Karthik Thovinakere"
+      - project.app.email="thovinak@mcmaster.ca"
+    restart: always
+    container_name: django
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Semester_Project:/app
+    networks:
+      - beelzebub
 
 #  watchtowerr:
 #    image: containrrr/watchtower
@@ -104,13 +106,13 @@ services:
 #      - WATCHTOWER_SCHEDULE=0 0 4 * * *
 #      - WATCHTOWER_INCLUDE_STOPPED='true'
 
-networks:
-  beelzebub:
-    ipam:
-      config:
-        - subnet: 10.10.10.0/28
-          gateway: 10.10.10.1
-
+#networks:
+#  beelzebub:
+#    ipam:
+#      config:
+#        - subnet: 10.10.10.0/28
+#          gateway: 10.10.10.1
+#
 
 volumes:
   redis_cache:
