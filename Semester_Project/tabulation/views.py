@@ -1,5 +1,6 @@
 import numpy as np
 from django.shortcuts import render
+from django.db import connection
 
 
 def index(request):
@@ -24,12 +25,11 @@ def index(request):
 
 
 def sine_wave(request):
-    data = []
-    values = np.linspace(0, 1000, 1000)
-    values = np.sin(values * np.pi ** 2)
-    FFT = fft_sine(values)
-    for i in range(len(values)):
-        data.append({'label': i, 'value': values[i], "fft": FFT[i]})
+    data = Get_SineData()
+
+    # FFT = fft_sine(values)
+    # for i in range(len(values)):
+    #     data.append({'label': i, 'value': values[i], "fft": FFT[i]})
 
     gets = {"fft_hide": request.GET.get('fft_hide')}
     debug = request.method
@@ -69,3 +69,19 @@ def ecg_signal(request):
 def fft_sine(data):
     data = np.fft.fft(data)
     return data
+
+
+def Get_SineData(start=0, end=1000):
+    cur = connection.cursor()
+    command = "SELECT t.* from dashboard_sinedata  t LIMIT 1000"
+    cur.execute(command)
+    return dictfetchall(cur)
+
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]

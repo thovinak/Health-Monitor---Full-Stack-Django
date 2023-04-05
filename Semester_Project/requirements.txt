@@ -1,0 +1,8 @@
+Django==4.2
+mysqlclient>=2.1
+numpy>=1.24.2
+matplotlib>=3.6.3
+paho-mqtt>=1.6.1
+mysql-connector-python>=8.0.32
+redis>=4.5.1
+hiredis>=2.2.2
