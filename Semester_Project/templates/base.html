@@ -84,7 +84,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/login" class="nav-link px-0 align-middle">
+                        <a href="/accounts/login" class="nav-link px-0 align-middle">
                             <img class="fs-4 inv" src="{% static 'icons/people-fill.svg' %}"/> <span
                                 class="ms-1 d-none d-sm-inline">Login</span> </a>
                     </li>
@@ -107,7 +107,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="/accounts/settings">Settings</a></li>
-                            <li><a class="dropdown-item" href="/accounts">Profile</a></li>
+                            <li><a class="dropdown-item" href="/accounts/">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -121,7 +121,7 @@
                                  class="rounded-circle inv">
                             <span class="d-none d-sm-inline mx-1">Hello Anonymous</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
                             <li><a class="dropdown-item" href="/accounts/login">Login</a></li>
                         </ul>
                     {% endif %}

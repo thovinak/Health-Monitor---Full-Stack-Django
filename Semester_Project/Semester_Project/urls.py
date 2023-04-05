@@ -17,14 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic import TemplateView
+
 from . import views
 
 urlpatterns = [
-                  path('', TemplateView.as_view(template_name='index.html')),
-                  path('admin/', admin.site.urls),
+                  path('', views.index, name='index'),
+                  path("admin/", admin.site.urls),
                   path("dashboard/", include('dashboard.urls', namespace='dashboard')),
                   path('accounts/', include('django.contrib.auth.urls')),
                   path("tabulation/", include('tabulation.urls', namespace='tabulation')),
                   path("accounts/", include('accounts.urls')),
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # ToDo Remove during publish
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
