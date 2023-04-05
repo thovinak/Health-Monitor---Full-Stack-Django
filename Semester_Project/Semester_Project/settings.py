@@ -48,6 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'Semester_Project.urls'
@@ -80,6 +83,20 @@ DATABASES = {
         'OPTIONS': {
             'read_default_file': os.path.join(BASE_DIR, 'configs', 'my.cnf'),
         },
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND'   : 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION'  : 'redis://redis:6379',
+        'TIMEOUT'   : 60,
+        'OPTIONS'   : {
+            'db'          : '1',
+            'parser_class': 'redis.connection.PythonParser',
+            'pool_class'  : 'redis.BlockingConnectionPool',
+        },
+        'KEY_PREFIX': 'DJANGO'
     }
 }
 

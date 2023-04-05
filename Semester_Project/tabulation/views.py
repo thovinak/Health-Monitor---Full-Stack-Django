@@ -1,6 +1,8 @@
 import numpy as np
 from django.shortcuts import render
 from django.db import connection
+import datetime
+import time
 
 
 def index(request):
@@ -25,18 +27,37 @@ def index(request):
 
 
 def sine_wave(request):
-    data = Get_SineData()
+    data = []
+    if "start_time" in request.GET:
+        start_time = request.GET['start_time']
+        start_time = datetime.datetime.strptime(start_time, '%H:%M')
 
-    # FFT = fft_sine(values)
-    # for i in range(len(values)):
-    #     data.append({'label': i, 'value': values[i], "fft": FFT[i]})
+        start_time = start_time.replace(year=datetime.datetime.now().year, month=datetime.datetime.now().month, day=datetime.datetime.now().day)
+        start_time = time.mktime(start_time.timetuple())
+    else:
+        start_time = time.time()
+
+    if 'records' in request.GET:
+        records = request.GET['records']
+    else:
+        records = 5000
+    values = Get_SineData(start_time, records)
+    for val in values:
+        data.append(val['data_val'])
+    FFT = fft_sine(data)
+    data = []
+    for i in range(len(values)):
+        data.append({'label': i, 'value': values[i]['data_val'], "fft": FFT[i]})
 
     gets = {"fft_hide": request.GET.get('fft_hide')}
-    debug = request.method
+
+    start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
+
     context = {
-        "data": data,
-        "gets": gets,
-        "debug": debug
+        "data"      : data,
+        "gets"      : gets,
+        'start_time': start_time,
+        'records'   : records
     }
     page = 'tabulation/sinewave.html'
     return render(request, page, context)
@@ -71,9 +92,9 @@ def fft_sine(data):
     return data
 
 
-def Get_SineData(start=0, end=1000):
+def Get_SineData(time_stamps, records):
     cur = connection.cursor()
-    command = "SELECT t.* from dashboard_sinedata  t LIMIT 1000"
+    command = "SELECT * from dashboard_sinedata where label between  FROM_UNIXTIME({time})-interval 1 minute and FROM_UNIXTIME({time}) limit {records}".format(time=time_stamps, records=records)
     cur.execute(command)
     return dictfetchall(cur)
 
