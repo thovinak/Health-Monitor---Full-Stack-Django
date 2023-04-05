@@ -100,18 +100,18 @@
                         <a href="#"
                            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle "
                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{% static 'images/'|add:user.profile_picture %}" alt="{{ user.username }}"
+                            <img src="{% static 'images/user_placeholder.svg' %}" alt="{{ user.username }}"
                                  width="30" height="30"
                                  class="rounded-circle">
                             <span class="d-none d-sm-inline mx-1">Hello, {{ user.username }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="/profile/settings">Settings</a></li>
-                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/accounts/settings">Settings</a></li>
+                            <li><a class="dropdown-item" href="/accounts">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/signout">Sign out</a></li>
+                            <li><a class="dropdown-item" href="/accounts/logout">Sign out</a></li>
                         </ul>
                     {% else %}
                         <a href="#"
@@ -122,7 +122,7 @@
                             <span class="d-none d-sm-inline mx-1">Hello Anonymous</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="/login">Login</a></li>
+                            <li><a class="dropdown-item" href="/accounts/login">Login</a></li>
                         </ul>
                     {% endif %}
                 </div>
