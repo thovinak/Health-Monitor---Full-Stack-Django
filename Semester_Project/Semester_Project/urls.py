@@ -27,4 +27,6 @@ urlpatterns = [
                   path('accounts/', include('django.contrib.auth.urls')),
                   path("tabulation/", include('tabulation.urls', namespace='tabulation')),
                   path("accounts/", include('accounts.urls')),
+                  path("api/", include('api.urls')),
+
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

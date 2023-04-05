@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'tabulation.apps.TabulationConfig',
     'accounts.apps.AccountsConfig',
+    'api.apps.ApiConfig',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
