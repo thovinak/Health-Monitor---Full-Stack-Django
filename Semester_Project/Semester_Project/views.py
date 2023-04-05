@@ -3,11 +3,12 @@ from django.contrib import auth
 
 
 def index(request):
-    data = ""
-    user_details = auth.get_user(request)
-    profile_picture = '/static/images/user_placeholder.svg'
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = '/static/images/user_placeholder.svg'
+
     context = {
-        'data': data,
         'profile_picture': profile_picture
     }
     return render(request, 'index.html', context)

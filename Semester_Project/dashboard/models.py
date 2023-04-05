@@ -10,8 +10,3 @@ class SineData(models.Model):
     class Meta:
         ordering = ['-label']
 
-    def get_data(self, start, end):
-        self.start = datetime.time(start)
-        self.end = datetime.time(end)
-        self.data = SineData.objects.filter(label__gte=self.start, label__lte=self.end)
-        return self.data
