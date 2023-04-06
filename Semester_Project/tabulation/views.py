@@ -39,17 +39,17 @@ def sine_wave(request):
 
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
 
-    # if request.user.is_authenticated:
-    #     profile_picture = request.user.profile.profile_picture
-    # else:
-    #     profile_picture = "profile_pictures/user_placedholder.svg"
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = "profile_pictures/user_placedholder.svg"
 
     context = {
         "data": render_data,
         "gets": gets,
         'start_time': start_time,
         'records': records,
-        # 'profile_picture': profile_picture
+        'profile_picture': profile_picture
     }
     page = 'tabulation/sinewave.html'
     return render(request, page, context)
@@ -85,17 +85,17 @@ def heart_beat(request):
 
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
 
-    # if request.user.is_authenticated:
-    #     profile_picture = request.user.profile.profile_picture
-    # else:
-    #     profile_picture = "profile_pictures/user_placedholder.svg"
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = "profile_pictures/user_placedholder.svg"
 
     context = {
         "data": render_data,
         "gets": gets,
         'start_time': start_time,
         'records': records,
-        # 'profile_picture': profile_picture
+        'profile_picture': profile_picture
     }
     page = 'tabulation/heartbeat.html'
     return render(request, page, context)
