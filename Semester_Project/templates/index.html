@@ -21,180 +21,17 @@
             border-radius: 50%;
         }
 
-        header {
-            text-align: center;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        body {
-            background-color: white;
-            transition: background-color 1s;
-
-            font-size: 24px;
-        }
-
-        body.dark {
-            background-color: black;
-            color: white;
-        }
-
-        .toggle-switch {
-            display: inline-block;
-            position: relative;
-            width: 40px;
-            height: 20px;
-            border-radius: 20px;
-            background-color: grey;
-            cursor: pointer;
-        }
-
-        .toggle-switch::after {
-            content: "";
-            display: block;
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: white;
-            top: 2px;
-            left: 2px;
-            transition: left 0.3s;
-        }
-
-        .toggle-switch.on {
-            background-color: green;
-        }
-
-        .toggle-switch.on::after {
-            left: 22px;
-        }
 
     </style>
     <body>
-    <div class="container">
-
-        <h1>Welcome to my website</h1>
-        <p>Click the toggle switch to turn on dark mode!</p>
-        <div class="toggle-switch" onclick="toggleDarkMode()"></div>
-    </div>
-
     <header>
+        <h1 class="mb-0">
 
-        <img src="{% static 'images/karthik_pic.jpg' %}" class="pic" alt="" style="width:10%">
-
-        <h1>Karthik Thovinakere</h1>
-        <p><img class="fs-4" src="{% static 'icons/code.svg' %}"/>Junior Software Developer</p>
-        <p><img class="fs-4" src="{% static 'icons/stack.svg' %}"/> Full stack</p>
-        <p><img class="fs-4" src="{% static 'icons/linkedin.svg' %}"/> <a
-                href="https://www.linkedin.com/in/karthikthovinakere/">linkedin</a></p>
-
+            <img src="{% static 'images/karthik_pic.jpg' %}" class="pic me-4" alt="" style="width:10%">
+            <em>Karthik Thovinakere</em>
+        </h1>
     </header>
-
-    <section>
-        <h2>Summary</h2>
-        <p>A skilled and motivated web developer with experience in developing and maintaining complex web applications.
-            Proficient in HTML, CSS, JavaScript,PHP and various web development frameworks. A creative problem solver
-            with excellent communication skills and a passion for staying up-to-date with the latest web
-            technologies.</p>
-    </section>
-
-    <section>
-        <h2>Skills</h2>
-        <table>
-            <tr>
-                <th>Web Development</th>
-                <th>Programming Languages</th>
-                <th>Frameworks/Libraries</th>
-            </tr>
-            <tr>
-                <td>HTML5</td>
-                <td>JavaScript</td>
-                <td>React.js</td>
-            </tr>
-            <tr>
-                <td>CSS3</td>
-                <td>php</td>
-                <td>Angular.js</td>
-            </tr>
-            <tr>
-                <td>jQuery</td>
-                <td>Java</td>
-                <td>Bootstrap</td>
-            </tr>
-        </table>
-    </section>
-
-    <section>
-        <h2>Work Experience</h2>
-        <table>
-            <tr>
-                <th>Job Title</th>
-                <th>Company</th>
-                <th>Duration</th>
-                <th>Responsibilities</th>
-            </tr>
-            <tr>
-                <td>Backend Lead</td>
-                <td>FirstHx</td>
-                <td>June 2022 - Present</td>
-                <td>
-                    <ul>
-                        <li>Led a team of 5 as a Backend Lead, overseeing the development of web applications
-                            and APIs using PHP and related technologies
-                        </li>
-                        <li> Utilized PHP to create a patient history-taking application, which included HTML, CSS,
-                            and JavaScript
-                        </li>
-                        <li>Participate in Agile development processes, including daily stand-up meetings and sprint
-                            planning
-                        </li>
-                        <li>Worked collaboratively with cross-functional teams, including UI/UX designers and
-                            medical professionals, to ensure the application met all requirements and was easy to
-                            use
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Junior Developer</td>
-                <td>FirstHx</td>
-                <td>January 2022</td>
-                <td>
-                    <ul>
-                        <li>Developed and maintained multiple web applications using Angular and Node.js</li>
-                        <li>Collaborated with clients to gather requirements and provide technical guidance</li>
-                        <li>Managed code reviews and mentored junior developers</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Logistics Co-Director</td>
-                <td>McMaster MacHacks Club</td>
-                <td>2022-Present</td>
-                <td>
-                    <ul>
-                        <li>Served as the Logistics Co-Director for MacHacks, an annual hackathon event that brings
-                            together students from across the McMaster community to collaborate and create
-                            innovative projects.
-                        </li>
-                        <li>Coordinated all aspects of event logistics, including securing sponsorships and donations,
-                            coordinating transportation and accommodations for participants, and managing event
-                            space and catering. This resulted in a successful event that received positive feedback
-                            from attendees and sponsors.
-                        </li>
-                        <li>Worked closely with the MacHacks executive team to develop event themes, logistics
-                            timelines, and budgets, ensuring that all aspects of the event were accounted for and
-                            executed efficiently
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </section>
-
+    <br>
     <section>
         <h2>Education</h2>
         <table>
@@ -204,9 +41,36 @@
                 <th>Graduation Date</th>
             </tr>
             <tr>
+                <td>High School</td>
+                <td>St.Thomas Aquinas</td>
+                <td>2018</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <ul>
+                        <li>Studied a variety of subjects, including English, Mathematics, Physics, and Chemistry
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Chemical Engineering Advanced Diploma</td>
+                <td> Mohawk College</td>
+                <td>2024</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <ul>
+                        <li>Will be awarded with a Bachelor of Technology Degree, Chemical Engineering
+                            Technology Advanced Diploma (Mohawk College), and a Business Management
+                            Certificate (Mohawk College)
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <td>Automation Engineering</td>
                 <td>McMaster University</td>
-                <td>2023</td>
+                <td>2024</td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -228,31 +92,131 @@
                     </ul>
                 </td>
             </tr>
+
         </table>
+    </section>
+
+
+    <section>
+        <h2>Work</h2>
+        <table>
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Website</th>
+                <th>Duration</th>
+                <th>Responsibilities</th>
+            </tr>
+            <tr>
+                <td><strong><em>Backend Lead [CO-OP] </em></strong></td>
+                <td>FirstHx</td>
+                <td><a href="https://www.firsthx.com/" target="_blank" class="btn btn-primary btn-sm ml-2">Visit
+                    Website</a></td>
+
+                <td>June 2022 - Present</td>
+                <td>
+                    <ul>
+                        <li>&nbsp Led a team of 5 as a Backend Lead, overseeing the development of web applications
+                            and APIs using PHP and related technologies
+                        </li>
+                        <li>&nbsp Utilized PHP to create a patient history-taking application, which included HTML, CSS,
+                            and JavaScript
+                        </li>
+                        <li>&nbsp Participate in Agile development processes, including daily stand-up meetings and
+                            sprint
+                            planning
+                        </li>
+                        <li>&nbsp Worked collaboratively with cross-functional teams, including UI/UX designers and
+                            medical professionals, to ensure the application met all requirements and was easy to
+                            use
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong><em>Junior Developer [CO-OP] </em></strong></td>
+                <td>FirstHx</td>
+                <td><a href="https://www.firsthx.com/" target="_blank" class="btn btn-primary btn-sm ml-2">Visit
+                    Website</a></td>
+                <td>January 2022</td>
+                <td>
+                    <ul>
+                        <li>&nbsp Developed and maintained multiple web applications using Angular and Node.js</li>
+                        <li>&nbsp Collaborated with clients to gather requirements and provide technical guidance</li>
+                        <li>&nbsp Managed code reviews and mentored junior developers</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong><em>Logistics Co-Director</em></strong></td>
+                <td>McMaster MacHacks Club</td>
+                <td><a href="https://www.mcmasterai.com/machacks" target="_blank" class="btn btn-primary btn-sm ml-2">Visit
+                    Website</a></td>
+
+                <td>2022-Present</td>
+                <td>
+                    <ul>
+                        <li>&nbsp Served as the Logistics Co-Director for MacHacks, an annual hackathon event that
+                            brings
+                            together students from across the McMaster community to collaborate and create
+                            innovative projects.
+                        </li>
+                        <li>&nbsp Coordinated all aspects of event logistics, including securing sponsorships and
+                            donations,
+                            coordinating transportation and accommodations for participants, and managing event
+                            space and catering. This resulted in a successful event that received positive feedback
+                            from attendees and sponsors.
+                        </li>
+                        <li>&nbsp Worked closely with the MacHacks executive team to develop event themes, logistics
+                            timelines, and budgets, ensuring that all aspects of the event were accounted for and
+                            executed efficiently
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Hobbies</h2>
+        <hr>
+        <h3>Hobbies:</h3>
+        <ol>
+            <li>Cooking: I enjoy trying out new recipes and experimenting with different ingredients to create delicious
+                meals.
+            </li>
+            <li>Badminton: I love playing badminton as it's a great way to stay active, improve my coordination and
+                agility, and socialize with friends.
+            </li>
+        </ol>
+        <h3>Interests:</h3>
+        <ol>
+            <li>Hiking: I love exploring the great outdoors and going on adventures through the mountains.</li>
+        </ol>
+        <h3>Professional Associations:</h3>
+        <ol>
+            <li>International Society of Automation (ISA): As a member of ISA, I have access to a wide range of
+                resources and networking opportunities in the field of automation and control systems engineering.
+            </li>
+        </ol>
+        <h3>Clubs:</h3>
+        <ol>
+            <li>McMaster Google Developer Club: Organized and hosted weekly coding events for the Google Developer Club
+                at McMaster,
+                providing members with opportunities to enhance their technical skills and collaborate on
+                projects
+            </li>
+            <br>
+            <li> McMaster MacHacks Club: Served as the Logistics Co-Director for MacHacks, an annual hackathon event
+                that
+                brings
+                together students from across the McMaster community to collaborate and create
+                innovative projects.
+            </li>
+        </ol>
     </section>
 
     </body>
 
-    <script>
-        function toggleDarkMode() {
-            const body = document.body;
-            body.classList.toggle("dark");
-
-            const toggleSwitch = document.querySelector(".toggle-switch");
-            toggleSwitch.classList.toggle("on");
-
-            if (body.classList.contains("dark")) {
-                localStorage.setItem("darkMode", "on");
-            } else {
-                localStorage.setItem("darkMode", "off");
-            }
-        }
-
-        if (localStorage.getItem("darkMode") === "on") {
-            toggleDarkMode();
-        }
-
-
-    </script>
 {% endblock %}
 
