@@ -42,16 +42,16 @@ def index(request):
 
     template = 'fourier/sinewave.html'
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
-    # if request.user.is_authenticated:
-    #     profile_picture = request.user.profile.profile_picture
-    # else:
-    #     profile_picture = "profile_pictures/user_placeholder.svg"
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = "profile_pictures/user_placeholder.svg"
     context = {
         "queries": queries,
         "start_time": start_time,
         'fft_data': fft_data,
         'fft_window': fft_window,
-        # 'profile_picture': profile_picture
+        'profile_picture': profile_picture
     }
     return render(request, template, context)
 
@@ -91,16 +91,16 @@ def heart_beat(request):
 
     template = 'fourier/heartbeat.html'
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
-    # if request.user.is_authenticated:
-    #     profile_picture = request.user.profile.profile_picture
-    # else:
-    #     profile_picture = "profile_pictures/user_placeholder.svg"
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = "profile_pictures/user_placeholder.svg"
     context = {
         "queries": queries,
         "start_time": start_time,
         'fft_data': fft_data,
         'fft_window': fft_window,
-        # 'profile_picture': profile_picture
+        'profile_picture': profile_picture
     }
     return render(request, template, context)
 
