@@ -30,10 +30,15 @@ def index(request):
     template = 'dashboard/sinewave.html'
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
 
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = "profile_pictures/user_placeholder.svg"
     context = {
         "queries": queries,
         "start_time": start_time,
         "data": data,
+        'profile_picture': profile_picture
     }
     return render(request, template, context)
 
@@ -65,10 +70,16 @@ def heartbeat(request):
     template = 'dashboard/heartbeat.html'
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
 
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile.profile_picture
+    else:
+        profile_picture = "profile_pictures/user_placeholder.svg"
     context = {
         "queries": queries,
         "start_time": start_time,
         "data": data,
+        'profile_picture': profile_picture
+
     }
     return render(request, template, context)
 
