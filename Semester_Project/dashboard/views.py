@@ -61,7 +61,7 @@ def heartbeat(request):
     if 'queries' in request.GET:
         queries = request.GET['queries']
     else:
-        queries = 100
+        queries = 50
     data = Get_HearBeatData(start_time, queries)
 
     if data == [] or data == ():

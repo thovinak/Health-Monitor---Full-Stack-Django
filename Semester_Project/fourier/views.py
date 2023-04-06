@@ -74,7 +74,7 @@ def heart_beat(request):
     if 'queries' in request.GET:
         queries = request.GET['queries']
     else:
-        queries = 300
+        queries = 50
     data = get_sin_data(start_time, queries)
 
     if data == [] or data == ():
