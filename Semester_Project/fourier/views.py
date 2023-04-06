@@ -14,7 +14,8 @@ def index(request):
         start_time = request.GET['start_time']
         start_time = datetime.datetime.strptime(start_time, '%H:%M')
 
-        start_time = start_time.replace(year=datetime.datetime.now().year, month=datetime.datetime.now().month, day=datetime.datetime.now().day)
+        start_time = start_time.replace(year=datetime.datetime.now().year, month=datetime.datetime.now().month,
+                                        day=datetime.datetime.now().day)
         start_time = time.mktime(start_time.timetuple())
     else:
         start_time = time.time()
@@ -41,12 +42,16 @@ def index(request):
 
     template = 'fourier/sinewave.html'
     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
-
+    # if request.user.is_authenticated:
+    #     profile_picture = request.user.profile.profile_picture
+    # else:
+    #     profile_picture = "profile_pictures/user_placeholder.svg"
     context = {
-        "queries"        : queries,
-        "start_time"     : start_time,
-        'fft_data'       : fft_data,
-        'fft_window'     : fft_window,
+        "queries": queries,
+        "start_time": start_time,
+        'fft_data': fft_data,
+        'fft_window': fft_window,
+        # 'profile_picture': profile_picture
     }
     return render(request, template, context)
 
@@ -55,62 +60,65 @@ def sin_wave(request):
     return index(request)
 
 
-# def heart_beat(request):
-#     if "start_time" in request.GET:
-#         start_time = request.GET['start_time']
-#         start_time = datetime.datetime.strptime(start_time, '%H:%M')
-#
-#         start_time = start_time.replace(year=datetime.datetime.now().year, month=datetime.datetime.now().month, day=datetime.datetime.now().day)
-#         start_time = time.mktime(start_time.timetuple())
-#     else:
-#         start_time = time.time()
-#
-#     if 'queries' in request.GET:
-#         queries = request.GET['queries']
-#     else:
-#         queries = 300
-#     data = get_sin_data(start_time, queries)
-#
-#     if data == [] or data == ():
-#         template = 'error.html'
-#         return render(request, template)
-#
-#     f_min = 25  # Minimum freq for sample, usually 25BPM
-#     f_max = 180  # Maximum freq for sample, usually 180BPM
-#
-#     fft_data = fourier_transform(data, f_min, f_max)
-#     fft_data['y'] = fft_data['y'][:, 0]
-#     fft_window = fourier_windowed_transform(data, f_min, f_max)
-#     fft_window['y'] = fft_window['y'][:, 0]
-#
-#     template = 'fourier/heartbeat.html'
-#     start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
-#     if request.user.is_authenticated:
-#         profile_picture = request.user.profile.profile_picture
-#     else:
-#         profile_picture = "profile_pictures/user_placeholder.svg"
-#     context = {
-#         "queries"        : queries,
-#         "start_time"     : start_time,
-#         'fft_data'       : fft_data,
-#         'fft_window'     : fft_window,
-#         'profile_picture': profile_picture
-#     }
-#     return render(request, template, context)
+def heart_beat(request):
+    if "start_time" in request.GET:
+        start_time = request.GET['start_time']
+        start_time = datetime.datetime.strptime(start_time, '%H:%M')
+
+        start_time = start_time.replace(year=datetime.datetime.now().year, month=datetime.datetime.now().month,
+                                        day=datetime.datetime.now().day)
+        start_time = time.mktime(start_time.timetuple())
+    else:
+        start_time = time.time()
+
+    if 'queries' in request.GET:
+        queries = request.GET['queries']
+    else:
+        queries = 300
+    data = get_sin_data(start_time, queries)
+
+    if data == [] or data == ():
+        template = 'error.html'
+        return render(request, template)
+
+    f_min = 25  # Minimum freq for sample, usually 25BPM
+    f_max = 180  # Maximum freq for sample, usually 180BPM
+
+    fft_data = fourier_transform(data, f_min, f_max)
+    fft_data['y'] = fft_data['y'][:, 0]
+    fft_window = fourier_windowed_transform(data, f_min, f_max)
+    fft_window['y'] = fft_window['y'][:, 0]
+
+    template = 'fourier/heartbeat.html'
+    start_time = datetime.datetime.fromtimestamp(start_time).strftime('%H:%M')
+    # if request.user.is_authenticated:
+    #     profile_picture = request.user.profile.profile_picture
+    # else:
+    #     profile_picture = "profile_pictures/user_placeholder.svg"
+    context = {
+        "queries": queries,
+        "start_time": start_time,
+        'fft_data': fft_data,
+        'fft_window': fft_window,
+        # 'profile_picture': profile_picture
+    }
+    return render(request, template, context)
 
 
 def get_sin_data(time_stamps, records):
     cur = connection.cursor()
-    command = "SELECT data_val from dashboard_sinedata where label between  FROM_UNIXTIME({time})-interval 1 minute and FROM_UNIXTIME({time}) limit {records}".format(time=time_stamps, records=records)
+    command = "SELECT data_val from dashboard_sinedata where label between  FROM_UNIXTIME({time})-interval 1 minute and FROM_UNIXTIME({time}) limit {records}".format(
+        time=time_stamps, records=records)
     cur.execute(command)
     return cur.fetchall()
 
 
-# def get_heartbeat_data(time_stamps, records):
-#     cur = connection.cursor()
-#     command = "SELECT value,time_stamp from dashboard_heartbeatdata where label between  FROM_UNIXTIME({time})-interval 1 minute and FROM_UNIXTIME({time}) limit {records}".format(time=time_stamps, records=records)
-#     cur.execute(command)
-#     return cur.fetchall()
+def get_heartbeat_data(time_stamps, records):
+    cur = connection.cursor()
+    command = "SELECT value,time_stamp from dashboard_heartbeatdata where label between  FROM_UNIXTIME({time})-interval 1 minute and FROM_UNIXTIME({time}) limit {records}".format(
+        time=time_stamps, records=records)
+    cur.execute(command)
+    return cur.fetchall()
 
 
 def fourier_transform(data, f_min, f_max):

@@ -7,7 +7,6 @@ from django.shortcuts import redirect, render
 @login_required(login_url='/accounts/login/')
 def index(request):
     page = 'accounts/index.html'
-
     context = {
         "profile_picture": "user_placeholder.svg"
     }

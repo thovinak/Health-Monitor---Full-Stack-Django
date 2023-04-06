@@ -30,7 +30,7 @@ def on_message(mqtt_client, userdata, msg):
         data = message['data']
         timestamp = message['Time']
         freq = message['freq']
-        noise_ecgsignal(data, timestamp, freq)
+        noise_heartbeat(data, timestamp, freq)
 
 
 def noise_sinewave(dataset: float, timestamp, freq: int):
@@ -46,14 +46,14 @@ def noise_sinewave(dataset: float, timestamp, freq: int):
     cnx.close()
 
 
-def noise_ecgsignal(dataset: float, timestamp, freq: int):
+def noise_heartbeat(dataset: float, timestamp, freq: int):
     cnx = mysql.connector.connect(read_default_file=str(os.path.join(BASE_DIR, 'configs', 'my.cnf')))
     cur = cnx.cursor()
-    time_const = 1 / freq
+    time_const = freq / 3600
     data = []
     for i in range(len(dataset)):
         data.append((dataset[i], timestamp + (time_const * i)))
-    cur.executemany('insert into dashboard_sinedata (data_val, label) values'
+    cur.executemany('insert into dashboard_heartbeatdata (`value`, time_stamp) values'
                     ' (%s,from_unixtime(%s));', data)
     cnx.commit()
     cnx.close()

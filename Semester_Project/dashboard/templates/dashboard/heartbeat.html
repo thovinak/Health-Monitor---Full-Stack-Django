@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block heading_content %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"
+            crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="mb-3">
+        <form method="get" class="needs-validation g-3" novalidate>
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <label for="start_time" class="form-label">Start Time</label>
+                    <input type="time" class="form-control" id="start_time" name="start_time"
+                           value="{{ start_time }}" required>
+                    <span class="valid-feedback"></span>
+                </div>
+                <div class="col-auto">
+                    <label for="end_time" class="form-label">Queries</label>
+                    <input type="integer" min="0" max="5000" step="1" value="{{ queries }}" class="form-control" id="queries"
+                           name="queries">
+                    <span class="valid-feedback"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <button type="submit" class="button btn-primary mb-3">Submit</button>
+                </div>
+                <div class="col-auto">
+                    <button type="reset" class="button btn-danger mb-3" onclick="">Reset</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <hr/>
+    <div class="w-auto">
+        <canvas id="heartbeat"></canvas>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+    <script type="text/javascript">
+
+        const cts = document.getElementById('heartbeat');
+        const data = {
+                labels: [{% for item in data %}'{{ item.time_stamp }}', {% endfor %}],
+                datasets: [{
+
+                    label: "Heart Beat",
+                    data: [{% for item in data %}{{ item.value }}, {% endfor %}],
+                    fill: false,
+                    tension: 0.1
+                }],
+                options: {
+                    responsive: true,
+                    aspectRatio: 1,
+                    scales: {
+                        x: {
+                            max: 1000
+                        },
+                        y: {
+                            max: 1
+                        }
+                    }
+                }
+                ,
+            }
+        ;
+        const config = {
+            type: 'line',
+            data: data,
+        };
+        const chart = new Chart(cts, config);
+    </script>
+
+{% endblock %}
