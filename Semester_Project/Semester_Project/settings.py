@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
     'rest_framework',
+    'fourier.apps.FourierConfig'
 
 ]
 
@@ -61,7 +62,6 @@ ROOT_URLCONF = 'Semester_Project.urls'
 
 LOGIN_REDIRECT_URL = "/accounts/"
 LOGOUT_REDIRECT_URL = "/"
-
 
 TEMPLATES = [
     {
@@ -96,13 +96,13 @@ DATABASES = {
 
 CACHES = {
     'default': {
-        'BACKEND'   : 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION'  : 'redis://redis:6379',
-        'TIMEOUT'   : 60,
-        'OPTIONS'   : {
-            'db'          : '1',
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://redis:6379',
+        'TIMEOUT': 60,
+        'OPTIONS': {
+            'db': '1',
             'parser_class': 'redis.connection.PythonParser',
-            'pool_class'  : 'redis.BlockingConnectionPool',
+            'pool_class': 'redis.BlockingConnectionPool',
         },
         'KEY_PREFIX': 'DJANGO'
     }
@@ -157,4 +157,11 @@ MQTT_USER = ''
 MQTT_PASSWORD = ''
 MQTT_TOPICS = [
     'noise_gen/signal/sinewave',
+    'noise_gen/signal/heartbeat',
+
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE'               : 10
+}

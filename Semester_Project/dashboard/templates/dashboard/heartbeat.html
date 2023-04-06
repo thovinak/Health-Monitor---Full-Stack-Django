@@ -39,7 +39,7 @@
     </div>
     <hr/>
     <div class="w-auto">
-        <canvas id="sineChart"></canvas>
+        <canvas id="heartbeat"></canvas>
     </div>
 {% endblock %}
 
@@ -47,39 +47,30 @@
 
     <script type="text/javascript">
 
-        const cts = document.getElementById('sineChart');
+        const cts = document.getElementById('heartbeat');
         const data = {
-            labels: [{% for item in data %}'{{ item.labels }}', {% endfor %}],
-            datasets
-        :
-        [{
+                labels: [{% for item in data %}'{{ item.time_stamp }}', {% endfor %}],
+                datasets: [{
 
-            label: "Noisy Sin Wave",
-            data: [{% for item in data %}{{ item.data_val }}, {% endfor %}],
-            fill: false,
-            tension: 0.1
-        }],
-            options
-        :
-        {
-            responsive: true,
-                aspectRatio
-        :
-            1,
-                scales
-        :
-            {
-                x: {
-                    max: 1000
+                    label: "Heart Beat",
+                    data: [{% for item in data %}{{ item.value }}, {% endfor %}],
+                    fill: false,
+                    tension: 0.1
+                }],
+                options: {
+                    responsive: true,
+                    aspectRatio: 1,
+                    scales: {
+                        x: {
+                            max: 1000
+                        },
+                        y: {
+                            max: 1
+                        }
+                    }
                 }
-            ,
-                y: {
-                    max: 1
-                }
+                ,
             }
-        }
-        ,
-        }
         ;
         const config = {
             type: 'line',

@@ -28,5 +28,5 @@ urlpatterns = [
                   path("tabulation/", include('tabulation.urls', namespace='tabulation')),
                   path("accounts/", include('accounts.urls')),
                   path("api/", include('api.urls')),
-
+                  path("fourier/", include('fourier.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

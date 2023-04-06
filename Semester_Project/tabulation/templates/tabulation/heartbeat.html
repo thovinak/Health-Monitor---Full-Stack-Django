@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block heading_content %}
+    <!-- nothing required here yet -->
+{% endblock %}
+{% block content %}
+    <h1>Controls</h1>
+    <div class="row">
+        <div class="col-6">
+            <form id="page-control" action="" method="get">
+                <div class="row">
+                    <div class="input-group">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="FFT"
+                                   name="fft_hide"
+                                    {% if gets.fft_hide == "on" %} checked {% endif %}>
+                            <label class="form-check-label" for="FFT">Hide FFT Data</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="start-time" step="0.1">Start Time</span>
+                            <input type="time" class="form-control" name="start_time" aria-describedby="start-time"
+                                   value="{{ start_time }}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="end-time">Records</span>
+                            <input type="number" class="form-control" name="records" aria-describedby="end-time"
+                                   value="{{ records }}" min="0" max="5000" step="1" placeholder="5000">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </br>
+
+    <hr>
+    <div class="row">
+        {% if gets.fft_hide is None %}
+            <div class="col-md-6 col-sm-12">
+                <h2>SineWave Tabulated Data</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover  table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="col-md-2">Data Point</th>
+                            <th scope="col" class="col-md-2">Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in data %}
+                            <tr>
+                                <th class="col-md-2" scope="row">{{ item.time_stamp }}</th>
+                                <td class="col-md-2">{{ item.value }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <h2>SineWave Tabulated Data</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="col-md-2">Data Point</th>
+                            <th scope="col" class="col-md-2">Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in data %}
+                            <tr>
+                                <th class="col-md-2" scope="row">{{ item.time_stamp }}</th>
+                                <td class="col-md-2">{{ item.value }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if gets.fft_hide is None %}
+            <div class="col-md-6 col-sm-12">
+                <h2>FFT Tabulated Data</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover  table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="col-md-1">Data Point</th>
+                            <th scope="col" class="col-md-1">FFT Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in data %}
+                            <tr>
+                                <th class="col-md-1" scope="row">{{ item.time_stamp }}</th>
+                                <td class="col-md-1">{{ item.fft }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <!-- nothing required here yet -->
+{% endblock %}

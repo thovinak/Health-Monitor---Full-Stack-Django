@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block heading_content %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"
+            crossorigin="anonymous" referrerpolicy="no-referrer" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="mb-3">
+        <form method="get" class="needs-validation g-3">
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <label for="start_time" class="form-label">Start Time</label>
+                    <input type="time" class="form-control" id="start_time" name="start_time" max=""
+                           value="{{ start_time }}" required>
+                    <span class="valid-feedback"></span>
+                </div>
+                <div class="col-auto">
+                    <label for="end_time" class="form-label">Queries</label>
+                    <input type="integer" min="0" max="5000" value="{{ queries }}" class="form-control" id="queries"
+                           name="queries">
+                    <span class="valid-feedback"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <button type="submit" class="button btn-primary mb-3">Submit</button>
+                </div>
+                <div class="col-auto">
+                    <button type="reset" class="button btn-danger mb-3" onclick="">Reset</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <hr/>
+    <div class="w-auto">
+        <canvas id="fftchart"></canvas>
+    </div>
+    <hr/>
+    <div class="w-auto">
+        <canvas id="fftwindow"></canvas>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+    <script type="text/javascript">
+
+        const cts = document.getElementById('fftchart');
+        const fftdata = {
+                labels: [{% for item in fft_data.x %}{{ item }}, {% endfor %}],
+                options: {
+                    responsive: true,
+                    aspectRatio: 1,
+                    scales: {
+                        x: {beginAtZero: true, type: 'logarithmic'}
+                    }
+                },
+                datasets: [{
+                    label: "FFT Data",
+                    data: [{% for item in fft_data.y %}{{ item }}, {% endfor %}],
+                    fill: false,
+                    tension: 0.1,
+                    borderColor: '#2980b9',
+                },],
+            }
+        ;
+        const fftconfig = {
+            type: 'line',
+            data: fftdata,
+        };
+        const fftchart = new Chart(cts, fftconfig);
+
+        const context = document.getElementById('fftwindow');
+        const data = {
+            labels: [{% for item in fft_window.x %}{{ item }}, {% endfor %}],
+            options: {
+                responsive: true,
+                aspectRatio: 1,
+            },
+            datasets: [{
+
+                label: "FFT Window",
+                data: [{% for item in fft_window.y %}{{ item }}, {% endfor %}],
+                fill: false,
+                tension: 1,
+                borderColor: '#ff0003',
+            }],
+        };
+        const config = {
+            type: 'line',
+            data: data,
+        };
+        const windowchart = new Chart(context, config);
+    </script>
+
+{% endblock %}

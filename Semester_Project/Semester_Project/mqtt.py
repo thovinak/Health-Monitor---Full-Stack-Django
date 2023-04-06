@@ -19,15 +19,21 @@ def on_connect(mqtt_client, userdata, flags, rc):
 
 
 def on_message(mqtt_client, userdata, msg):
-    if 'noise_gen/signal/sinewave' in msg.topic:
+    if 'sinewave' in msg.topic:
         message = json.loads(msg.payload)
         data = message['data']
         timestamp = message['Time']
         freq = len(data)
-        noise_signal(data, timestamp, freq)
+        noise_sinewave(data, timestamp, freq)
+    elif 'heartbeat' in msg.topic:
+        message = json.loads(msg.payload)
+        data = message['data']
+        timestamp = message['Time']
+        freq = message['freq']
+        noise_heartbeat(data, timestamp, freq)
 
 
-def noise_signal(dataset: float, timestamp, freq: int):
+def noise_sinewave(dataset: float, timestamp, freq: int):
     cnx = mysql.connector.connect(read_default_file=str(os.path.join(BASE_DIR, 'configs', 'my.cnf')))
     cur = cnx.cursor()
     time_const = 1 / freq
@@ -40,12 +46,25 @@ def noise_signal(dataset: float, timestamp, freq: int):
     cnx.close()
 
 
+def noise_heartbeat(dataset: float, timestamp, freq: int):
+    cnx = mysql.connector.connect(read_default_file=str(os.path.join(BASE_DIR, 'configs', 'my.cnf')))
+    cur = cnx.cursor()
+    time_const = freq / 3600
+    data = []
+    for i in range(len(dataset)):
+        data.append((dataset[i], timestamp + (time_const * i)))
+    cur.executemany('insert into dashboard_heartbeatdata (`value`, time_stamp) values'
+                    ' (%s,from_unixtime(%s));', data)
+    cnx.commit()
+    cnx.close()
+
+
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 client.username_pw_set(settings.MQTT_USER, settings.MQTT_PASSWORD)
 client.connect(
-        host=settings.MQTT_SERVER,
-        port=settings.MQTT_PORT,
-        keepalive=settings.MQTT_KEEPALIVE
+    host=settings.MQTT_SERVER,
+    port=settings.MQTT_PORT,
+    keepalive=settings.MQTT_KEEPALIVE
 )
