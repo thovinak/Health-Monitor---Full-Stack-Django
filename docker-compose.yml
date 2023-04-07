@@ -92,27 +92,27 @@ services:
     networks:
       - beelzebub
 
-#  watchtowerr:
-#    image: containrrr/watchtower
-#    container_name: watchtowerr
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    restart: always
-#    networks:
-#      - beelzebub
-#    environment:
-#      - WATCHTOWER_CLEANUP='true'
-#      - TZ=America/Toronto
-#      - WATCHTOWER_SCHEDULE=0 0 4 * * *
-#      - WATCHTOWER_INCLUDE_STOPPED='true'
+  watchtowerr:
+    image: containrrr/watchtower
+    container_name: watchtowerr
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    networks:
+      - beelzebub
+    environment:
+      - WATCHTOWER_CLEANUP='true'
+      - TZ=America/Toronto
+      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+      - WATCHTOWER_INCLUDE_STOPPED='true'
 
-#networks:
-#  beelzebub:
-#    ipam:
-#      config:
-#        - subnet: 10.10.10.0/28
-#          gateway: 10.10.10.1
-#
+networks:
+  beelzebub:
+    ipam:
+      config:
+        - subnet: 10.10.10.0/28
+          gateway: 10.10.10.1
+
 
 volumes:
   redis_cache:
