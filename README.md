@@ -61,7 +61,7 @@ Key Aspects of this project are:
 ## Configs and Environment Variables
 
 1. Change the [my.cnf](Semester_Project/configs/my.cnf) to reflect the username and password for your mysql instance.
-2. Change the [dotenv](Semester_Project/configs/.env) to .env to  reflect the username and password for your mysql
+2. Change the [dotenv](dotenv) to .env to  reflect the username and password for your mysql
    instance.
 
 ## SQL Scripts
@@ -73,7 +73,7 @@ Key Aspects of this project are:
      And optionanlly, you can run the following to add limitations to database queries and size.
    * [3 - limit_size.sql](sql_scripts/limit_size.sql) this will limit the size of the database to  about 190MB of
      space.
-   *
+
 2. Run the following commands
 
 ```PowerShell
