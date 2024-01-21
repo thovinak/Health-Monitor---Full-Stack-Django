@@ -1,9 +1,6 @@
-# Semester Project
+An example of the project working can be found [dev.karthikthovinakere.tech](http://dev.karthikthovinakere.tech:8000/) 
 
-This is the semester project for the course PROCTECH 4IT3, **McMaster University**.
-An example of the project working can be found [dev.karthikthovinakere.tech](http://dev.karthikthovinakere.tech:8000/)
 
-**_SQL queries takes forever so please be patient 😕_**
 
 ## Description
 
